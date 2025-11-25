@@ -42,7 +42,9 @@ TMPDIR="$DESTDIR/IPKG_BUILD.$$"
 mkdir "$TMPDIR"
 echo "CONTROL" > "$TMPDIR/tarX"
 
-TIMESTAMP=$(date)
+# Unix epoch format
+TIMESTAMP=$(date '+%s')
+TIMESTAMP="@$TIMESTAMP"
 
 $TAR -X "$TMPDIR/tarX" -cpzf "$TMPDIR/data.tar.gz" -C "$DIR" --numeric-owner --owner 0 --group 0 --format=gnu --sort=name --mtime="$TIMESTAMP" . || exit 1
 
